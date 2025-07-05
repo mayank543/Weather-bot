@@ -1,12 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import './index.css';
+// import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ClerkProvider } from '@clerk/clerk-react';
+
+
+// Import your Publishable Key
+const clerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!clerkKey) {
+  throw new Error('Missing Publishable Key')
+}
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
+    
+      <ClerkProvider publishableKey={clerkKey}>
       <App />
-    </GoogleOAuthProvider>
+    </ClerkProvider>
+    
   </React.StrictMode>
 );

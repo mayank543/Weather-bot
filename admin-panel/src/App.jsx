@@ -1,10 +1,8 @@
-import { useState } from 'react';
-import Login from "./components/login"; 
+import { SignedIn, SignedOut, SignIn } from '@clerk/clerk-react';
 import UserManagement from './components/UserManagement';
+import Dashboard from './components/dashboard';
 
 function App() {
-  const [token, setToken] = useState(null);
-
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900">
       <header className="bg-white shadow p-4 text-xl font-bold text-center">
@@ -12,11 +10,17 @@ function App() {
       </header>
 
       <main className="p-6">
-        {!token ? (
-          <Login onLogin={setToken} />
-        ) : (
-          <UserManagement token={token} />
-        )}
+        <SignedIn>
+          <Dashboard/>
+          <UserManagement  />
+        </SignedIn>
+
+        <SignedOut>
+          {/* Show inline login when not signed in */}
+          <div className="flex justify-center items-center h-[70vh]">
+            <SignIn />
+          </div>
+        </SignedOut>
       </main>
     </div>
   );
