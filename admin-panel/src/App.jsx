@@ -11,7 +11,7 @@ function App() {
 
       <main className="p-6">
         <SignedIn>
-          <Dashboard/>
+          
           <UserManagement  />
         </SignedIn>
 
